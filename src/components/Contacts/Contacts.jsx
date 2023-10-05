@@ -1,4 +1,3 @@
-import { nanoid } from '@reduxjs/toolkit';
 import { useEffect } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { deleteContact } from 'redux/slice';
