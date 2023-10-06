@@ -2,11 +2,12 @@ import React from 'react';
 import css from './Form.module.css';
 import { addContact } from 'redux/slice';
 import { nanoid } from '@reduxjs/toolkit';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 export const Form = () => {
  
   const dispatch = useDispatch();
+  const contacts = useSelector((state) => state.contactList.contacts)
       
      const handleSubmit = (event) => {
        event.preventDefault()
@@ -14,7 +15,12 @@ export const Form = () => {
        const name = form.elements.name.value
        const number = form.elements.number.value
        const id = nanoid()
-       const newContact = {id, name, number}
+       const newContact = { id, name, number }
+       const existName = contacts.find(contact =>
+         contact.name.toLowerCase() === name.toLowerCase().trim())
+       if (existName) { alert(`${name} is already in contacts!`)
+         return
+       }
        dispatch(addContact(newContact))
        form.reset()
       }
