@@ -3,11 +3,12 @@ import css from './Form.module.css';
 import { addContact } from 'redux/slice';
 import { nanoid } from '@reduxjs/toolkit';
 import { useDispatch, useSelector } from 'react-redux';
+import { getContacts } from 'redux/selectors';
 
 export const Form = () => {
  
   const dispatch = useDispatch();
-  const contacts = useSelector((state) => state.contactList.contacts)
+  const contacts = useSelector(getContacts)
       
      const handleSubmit = (event) => {
        event.preventDefault()
